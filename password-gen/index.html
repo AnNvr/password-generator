@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      />
+      <!-- Google fonts -->
+      <link
+        href="https://fonts.googleapis.com/css2?family=Karla:wght@400;800&display=swap"
+        rel="stylesheet"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+  </head>
+  <body>
+    <div id="app" class="app">
+      <div class="heading">
+        
+        <span class="white-title">Generate a</span>
+        <span class="green-title">random password</span>
+      </div>
+
+      <div class="toggle-container">
+        <div class="toggle" id="toggleId">
+          <div class="circle"></div>
+        </div>
+        <span class="text">OFF</span>
+      </div>
+
+      <!-- <div class="settings">
+        <div class="input-group">
+          <label>Password length (6-15)</label>
+          <input type="range" id="length" min="6" max="15" step="1" />
+          <span id="length-result">10</span>
+        </div>
+      </div> -->
+
+      
+      <h3>Never use an insecure password again.</h3>
+      <button id="generatePassword" class="generate-password">Generate Passwords</button>
+      <div class="input-container">
+        <div class="input-field">
+          <input type="text" id="input-el1" class="input-el1" readonly>
+          <input type="text" id="input-el2" readonly>
+        </div>
+
+          <button id="copyButton" class="copy-btn"><i class="fa-solid fa-copy"></i></button>
+
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
