@@ -27,6 +27,8 @@
         <span class="green-title">random password</span>
       </div>
 
+      <h3>Never use an insecure password again.</h3>
+
       <div class="toggle-container">
         <div class="toggle" id="toggleId">
           <div class="circle"></div>
@@ -34,16 +36,25 @@
         <span class="text">OFF</span>
       </div>
 
-      <!-- <div class="settings">
+      <div class="settings">
         <div class="input-group">
-          <label>Password length (6-15)</label>
+          <label class="label">Password length (6-15)</label>
           <input type="range" id="length" min="6" max="15" step="1" />
-          <span id="length-result">10</span>
+          <span id="length-result"></span>
         </div>
-      </div> -->
 
+        <div class="input-group">
+          <label>Numbers</label>
+          <input type="checkbox" id="numbers"/>
+        </div>
+
+        <div class="input-group">
+          <label>Symbols</label>
+          <input type="checkbox" id="symbols"/>
+        </div>
+      </div>
       
-      <h3>Never use an insecure password again.</h3>
+      
       <button id="generatePassword" class="generate-password">Generate Passwords</button>
       <div class="input-container">
         <div class="input-field">
