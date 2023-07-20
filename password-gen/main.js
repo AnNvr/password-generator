@@ -2,10 +2,17 @@ const characters = [
   "A","B","C","D","E","F","G","H","I","J","K","L","M",
   "N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e",
   "f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w",
-  "x","y","z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9","~","`","!",
-  "@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]",",",
-  "|",":",";","<",">",".","?","/"
+  "x","y","z"
 ];
+
+const symbols = [
+  "~","`","!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]",",",
+  "|",":",";","<",">",".","?","/"
+]
+
+const numbers = [
+  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+]
 
 // Toggle dark/light mode:
 
@@ -26,12 +33,13 @@ document.getElementById("toggleId").addEventListener("click", () => {
     text.innerHTML = "ON"
     app.style.backgroundColor = "#ECFDF5"
     title.classList.add("dark-title")
-    label.classList.add("")
+    label.classList.add("dark-title")
   } else {
     toggle.classList.remove("active")
     text.innerHTML = "OFF"
     app.style.backgroundColor = "#1F2937"
     title.classList.remove("dark-title")
+    label.classList.remove("dark-title")
   }
 })
 
@@ -43,9 +51,12 @@ let inputEl1 = document.getElementById("input-el1")
 let inputEl2 = document.getElementById("input-el2")
 // the button to generate passwords
 let generatePassword = document.getElementById("generatePassword")
-// and the password length elements in the settings container
+// the password length elements in the settings container
 let passwordLength = document.getElementById("length")
 let passwordLengthResult = document.getElementById("length-result")
+// and the checkbox elements to set symbols and numbers on/off
+let loadNumbers = document.getElementById("numbers")
+let loadSymbols = document.getElementById("symbols")
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -54,8 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // then it updates the content of "length-result" element with the initial value
   passwordLengthResult.textContent = length
 
-  inputEl1.value = generatePassword(length)
-  inputEl2.value = generatePassword(length)
+  inputEl1.value = generatePasswordFunction(length)
+  inputEl2.value = generatePasswordFunction(length)
 })
 
 // listen for password length change:
@@ -67,26 +78,32 @@ passwordLength.addEventListener("change", (e) => {
   passwordLengthResult.textContent = length
 })
 
+
 // Generate a randomic password
 generatePassword.addEventListener("click", function() {
   // take the whichever is the value of the password length selector and store it into a variable
   let length = passwordLength.value
   // define two empty variables to store the generated passwords
-  let password1 = ""
-  let password2 = ""
+  // let password1 = ""
+  // let password2 = ""
+  let includeNumbers = loadNumbers.checked
+  let includeSymbols = loadSymbols.checked
+
+  let password1 = generatePasswordFunction(length, includeNumbers, includeSymbols)
+  let password2 = generatePasswordFunction(length, includeNumbers, includeSymbols)
 
   // loop over length to generate random characters for the password
-  for (let i =0; i < length; i++) {
-    // generate a randomic value of 15 indexes in the character array
-    let randomIndex1 = Math.floor(Math.random() * characters.length)
-    let randomIndex2 = Math.floor(Math.random() * characters.length)
-    // access to the indexes string values
-    let randomCharacter1 = characters[randomIndex1]
-    let randomCharacter2 = characters[randomIndex2]
+  // for (let i =0; i < length; i++) {
+  //   // generate a randomic value of 15 indexes in the character array
+  //   let randomIndex1 = Math.floor(Math.random() * characters.length)
+  //   let randomIndex2 = Math.floor(Math.random() * characters.length)
+  //   // access to the indexes string values
+  //   let randomCharacter1 = characters[randomIndex1]
+  //   let randomCharacter2 = characters[randomIndex2]
     // generate password
-    password1 += randomCharacter1
-    password2 += randomCharacter2
-  }
+  //   password1 += randomCharacter1
+  //   password2 += randomCharacter2
+  // }
 
   inputEl1.value = password1
   inputEl2.value = password2
@@ -106,3 +123,26 @@ copyButton.addEventListener("click", function() {
   alert("Copied the password: " + inputEl2.value);
   })
 
+  // function to generate a password with options for numbers and symbols
+  function generatePasswordFunction(length, includeNumbers, includeSymbols) {
+    // new array used to generate password with options
+    let charactersToUse = characters.slice()
+
+    if (includeNumbers) {
+      charactersToUse = charactersToUse.concat(numbers)
+    }
+
+    if (includeSymbols) {
+      charactersToUse = charactersToUse.concat(symbols)
+    }
+
+    let password = ""
+
+    for (let i = 0; i < length; i++) {
+      let randomIndex = Math.floor(Math.random() * charactersToUse.length)
+      let randomCharacter = charactersToUse[randomIndex]
+      password += randomCharacter
+    }
+
+    return password
+  }
